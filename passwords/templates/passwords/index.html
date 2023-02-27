@@ -1,5 +1,24 @@
 {% include "passwords/layout.html" %}
 
 {% block content %}
-<h1>Hello passwords :)</h1>
+<h1>Passwords</h1>
+
+<ul>
+    {% for data in password_data %}
+    <li>{{ data }}</li>
+    <form action="{% url 'delete' data.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="delete">
+    </form>
+    {% empty %}
+    <p>No data yet</p>
+    {% endfor %}
+</ul>
+
+<form method="post">
+    {{ form }}
+    {% csrf_token %}
+    <input type="submit" >
+</form>
+
 {% endblock %}
