@@ -1,26 +1,30 @@
 {% extends "passwords/layout.html" %}
 
 {% block body %}
-<h1>Passwords for {{ user }}</h1>
+<h1 class="text-4xl font-bold mb-8">Passwords for {{ user }}</h1>
 
-<ul>
+<ul class="list-square text-xl list-inside list-disc py-2">
     {% for data in password_data %}
-    <li>{{ data }}</li>
+    <li class="flex justify-center items-center">{{ data }}
     <form action="{% url 'delete' data.id %}" method="post">
         {% csrf_token %}
-        <input type="submit" value="delete">
+        <input type="submit" class="text-red-500 inline hover:text-red-700 hover:underline px-4 rounded focus:outline-none focus:shadow-outline" value="delete">
     </form>
+    </li>
     {% empty %}
     <p>No data yet</p>
     {% endfor %}
 </ul>
 
-<form method="post">
-    {{ form }}
-    {% csrf_token %}
-    <input type="submit" >
-</form>
+<div class="flex justify-center items-center">
+    <form class="flex flex-col w-1/3 justify-center items-center" method="post">
+        {{ form }}
+        {% csrf_token %}
+        <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" >
+    </form>
+</div>
 
-<a href="{% url 'logout' %}">Log out</a>
+
+<a class="text-blue-500 hover:text-blue-700 font-medium hover:underline" href="{% url 'logout' %}">Log out</a>
 
 {% endblock %}
