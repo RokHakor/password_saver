@@ -58,10 +58,10 @@ def login_user(request):
 
 def register_user(request):
 
-    form = UserCreationForm()
+    form = CustomUserCreationForm()
 
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             user.save()
@@ -69,7 +69,8 @@ def register_user(request):
             return redirect('index')
         else:
             return render(request, 'passwords/register.html', {
-                'msg': 'Something went wrong during registration'
+                'msg': 'Something went wrong during registration',
+                'form': form
             })
     
     return render(request, "passwords/register.html", {"form": form})
