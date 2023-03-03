@@ -5,7 +5,8 @@
 
 <ul class="list-square text-xl list-inside list-disc py-2">
     {% for data in password_data %}
-    <li class="flex justify-center items-center">{{ data }}
+    <li class="flex justify-center items-center">
+        <p>Password for {{ data.name }} is '<p class="bg-black rounded hover:bg-white">{{ data.password }}</p>'</p> 
     <form action="{% url 'delete' data.id %}" method="post">
         {% csrf_token %}
         <input type="submit" class="text-red-500 inline hover:text-red-700 hover:underline px-4 rounded focus:outline-none focus:shadow-outline" value="delete">
